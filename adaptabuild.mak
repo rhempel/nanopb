@@ -55,10 +55,6 @@ $(MODULE)_SRCPATH += $(MODULE_PATH)/examples/simple
 
 $(MODULE)_INCPATH := $(MODULE_PATH)
 
-ifneq (host,$(MCU))
-  $(MODULE)_INCPATH += $(umm_libc_PATH)/include
-endif
-
 ifeq (unittest,$(MAKECMDGOALS))
 #  $(MODULE)_SRCPATH += $(MODULE_PATH)/unittest
 
@@ -87,14 +83,6 @@ $(MODULE)_CFLAGS +=
 
 ifeq (unittest,$(MAKECMDGOALS))
   $(MODULE)_CDEFS +=
-endif
-
-# TODO: Move this out of the library build and up into general adapatabuild
-
-ifeq (host,$(MCU))
-    # Do nothing - we want the standard library for host builds
-else
-    $(MODULE)_CFLAGS += -nostdinc
 endif
 
 # ----------------------------------------------------------------------------
